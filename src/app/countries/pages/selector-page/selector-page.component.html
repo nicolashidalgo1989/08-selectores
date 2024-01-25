@@ -1,1 +1,45 @@
-<p>selector-page works!</p>
+<div class="row">
+
+  <div class="col-12">
+    <h2 class="h5 mt-1">Selectores anidados</h2>
+    <hr>
+  </div>
+
+  <div class="col-12 col-sm-4">
+
+    <form [formGroup]="myForm">
+
+      <!-- Region -->
+      <div class="row mb-3">
+        <div class="col">
+          <label for="" class="form-label">Continente:</label>
+          <select formControlName="region" id="" class="form-control">
+            <option value="">Seleccione Continente</option>
+            <option [value]="region" *ngFor="let region of regions">{{ region }}</option>
+          </select>
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div class="my-5 col-12">
+
+    <h3 class="h5">Formulario</h3>
+    <hr>
+    <div class="card my-4 p-3">
+
+      <code >
+        {{ myForm.value | json }}
+      </code>
+    </div>
+
+    <dl>
+      <dt>is form valid?:</dt>
+      <dd>{{ myForm.valid }}</dd>
+    </dl>
+
+  </div>
+
+</div>
