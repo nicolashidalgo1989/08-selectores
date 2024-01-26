@@ -1,31 +1,36 @@
-export enum Region{
+export enum Region {
   Africa   = 'Africa',
   Americas = 'Americas',
   Asia     = 'Asia',
   Europe   = 'Europe',
-  Ocenia   = 'Ocenia',
+  Oceania  = 'Oceania',
 }
+
+export interface SmallCountry {
+  name   : string;
+  cca3   : string;
+  borders: string[];
+}
+
 
 export interface Country {
   name:         Name;
   cca3:         string;
-  cioc?:        string;
   status:       Status;
-  unMember:     boolean;
   idd:          Idd;
   capital:      string[];
   altSpellings: string[];
-  languages:    { [key: string]: string };
+  region:       string;
+  subregion:    Subregion;
+  languages:    Languages;
   translations: { [key: string]: Translation };
   latlng:       number[];
   landlocked:   boolean;
-  borders?:     string[];
   area:         number;
   demonyms:     Demonyms;
   flag:         string;
   maps:         Maps;
   population:   number;
-  fifa?:        string;
   car:          Car;
   timezones:    string[];
   continents:   string[];
@@ -33,8 +38,11 @@ export interface Country {
   coatOfArms:   CoatOfArms;
   startOfWeek:  StartOfWeek;
   capitalInfo:  CapitalInfo;
-  postalCode?:  PostalCode;
+  cioc?:        string;
+  borders?:     string[];
   gini?:        { [key: string]: number };
+  fifa?:        string;
+  postalCode?:  PostalCode;
 }
 
 export interface CapitalInfo {
@@ -57,31 +65,31 @@ export interface CoatOfArms {
 }
 
 export interface Currencies {
-  EUR?: All;
-  RUB?: All;
-  CZK?: All;
-  UAH?: All;
-  ISK?: All;
   NOK?: All;
+  EUR?: All;
   GBP?: All;
   GGP?: All;
-  RSD?: All;
-  GIP?: All;
-  SEK?: All;
-  DKK?: All;
-  IMP?: All;
-  HUF?: All;
-  ALL?: All;
-  CHF?: All;
-  JEP?: All;
-  MDL?: All;
-  MKD?: All;
   RON?: All;
+  MKD?: All;
+  ALL?: All;
+  DKK?: All;
+  CHF?: All;
+  CZK?: All;
   PLN?: All;
-  BAM?: BAM;
-  BYN?: All;
+  RSD?: All;
+  RUB?: All;
+  IMP?: All;
+  SEK?: All;
+  MDL?: All;
   FOK?: All;
   BGN?: All;
+  BYN?: All;
+  BAM?: BAM;
+  JEP?: All;
+  HUF?: All;
+  UAH?: All;
+  GIP?: All;
+  ISK?: All;
 }
 
 export interface All {
@@ -114,6 +122,57 @@ export interface Idd {
   suffixes: string[];
 }
 
+export interface Languages {
+  nor?: string;
+  deu?: string;
+  fra?: string;
+  nld?: string;
+  lav?: string;
+  cat?: string;
+  eng?: string;
+  mlt?: string;
+  nfr?: string;
+  ron?: string;
+  mkd?: string;
+  sqi?: string;
+  dan?: string;
+  est?: string;
+  ces?: string;
+  slk?: string;
+  swe?: string;
+  pol?: string;
+  srp?: string;
+  rus?: string;
+  glv?: string;
+  spa?: string;
+  ell?: string;
+  fao?: string;
+  bul?: string;
+  bel?: string;
+  cnr?: string;
+  bos?: string;
+  hrv?: string;
+  lit?: string;
+  de?:  string;
+  ltz?: string;
+  nno?: string;
+  nob?: string;
+  smi?: string;
+  nrf?: string;
+  hun?: string;
+  ita?: string;
+  ukr?: string;
+  fin?: string;
+  por?: string;
+  lat?: string;
+  slv?: string;
+  gle?: string;
+  gsw?: string;
+  roh?: string;
+  tur?: string;
+  isl?: string;
+}
+
 export interface Maps {
   googleMaps:     string;
   openStreetMaps: string;
@@ -142,4 +201,13 @@ export enum StartOfWeek {
 export enum Status {
   OfficiallyAssigned = "officially-assigned",
   UserAssigned = "user-assigned",
+}
+
+export enum Subregion {
+  CentralEurope = "Central Europe",
+  EasternEurope = "Eastern Europe",
+  NorthernEurope = "Northern Europe",
+  SoutheastEurope = "Southeast Europe",
+  SouthernEurope = "Southern Europe",
+  WesternEurope = "Western Europe",
 }

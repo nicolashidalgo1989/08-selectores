@@ -5,7 +5,7 @@
     <hr>
   </div>
 
-  <div class="col-12 col-sm-4">
+  <div class="col-12 col-md-4">
 
     <form [formGroup]="myForm">
 
@@ -16,6 +16,17 @@
           <select formControlName="region" id="" class="form-control">
             <option value="">Seleccione Continente</option>
             <option [value]="region" *ngFor="let region of regions">{{ region }}</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Countries -->
+      <div class="row mb-3" *ngIf="myForm.controls['region'].value !== ''">
+        <div class="col">
+          <label for="" class="form-label">País:</label>
+          <select formControlName="country" id="" class="form-control">
+            <option value="">Seleccione País</option>
+            <option [value]="country.cca3" *ngFor="let country of countriesByRegion">{{ country.name }}</option>
           </select>
         </div>
       </div>
