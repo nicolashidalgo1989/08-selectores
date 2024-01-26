@@ -21,7 +21,7 @@
       </div>
 
       <!-- Countries -->
-      <div class="row mb-3" *ngIf="myForm.controls['region'].value !== ''">
+      <div class="row mb-3" *ngIf="countriesByRegion.length > 0">
         <div class="col">
           <label for="" class="form-label">País:</label>
           <select formControlName="country" id="" class="form-control">
