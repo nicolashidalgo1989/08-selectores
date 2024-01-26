@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CountryService } from '../../services/country.service';
 import { Country, Region, SmallCountry } from '../../interfaces/country.inteface';
-import { switchMap, tap } from 'rxjs';
+import { filter, switchMap, tap } from 'rxjs';
 
 @Component({
   templateUrl: './selector-page.component.html'
 })
 export class SelectorPageComponent implements OnInit {
 
-  public countriesByRegion: SmallCountry[] = [];
+  public countriesByRegion: SmallCountry[] = []; 
+  public bordersByCountry: string[] = []; 
 
   public myForm: FormGroup = this.fb.group({
     region: [ '', [ Validators.required ]],
@@ -25,6 +26,7 @@ export class SelectorPageComponent implements OnInit {
   ngOnInit(): void {
 
     this.onRegionChanged();
+    this.onCountryChanged();
 
   }
 
@@ -36,11 +38,27 @@ export class SelectorPageComponent implements OnInit {
     this.myForm.get('region')!.valueChanges
       .pipe(
         tap( () => this.myForm.get('country')!.setValue('') ),
+        tap( () => this.bordersByCountry = [] ),
         switchMap( region => this.cs.getCountriesByRegion(region) ),
       )
       .subscribe( countries => {
         this.countriesByRegion = countries;
       })
+  }
+
+  onCountryChanged():void{
+    this.myForm.get('country')!.valueChanges
+    .pipe(
+      tap( () => this.myForm.get('borders')!.setValue('') ),
+      filter( (value:string) => value.length > 0 ),
+      switchMap( alphacode => this.cs.getCountriesByAlphaCode(alphacode) ),
+    )
+    .subscribe( country => {
+      console.log({
+        borders : country.borders
+      });
+      this.bordersByCountry = country.borders;
+    })
   }
 
 }
